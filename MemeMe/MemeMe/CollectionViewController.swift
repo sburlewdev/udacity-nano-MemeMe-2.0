@@ -33,7 +33,7 @@ class CollectionViewController: UICollectionViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "MemeDetail" {
-      let detail = segue.destinationViewController as! MemeDetailViewController
+      let detail = segue.destinationViewController as! MemeViewController
       let index = self.collectionView!.indexPathForCell(sender as! MemeCollectionCell)!.row
       
       guard let image = self.data.getMeme(atIndex: index)?.memedImage else {

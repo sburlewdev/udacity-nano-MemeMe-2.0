@@ -19,7 +19,7 @@ class TableViewController: UITableViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "MemeDetail" {
-      let detail = segue.destinationViewController as! MemeDetailViewController
+      let detail = segue.destinationViewController as! MemeViewController
       let cell = sender as! MemeTableCell
       
       /*
