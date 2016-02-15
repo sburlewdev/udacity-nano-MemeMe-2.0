@@ -102,7 +102,18 @@ class MemeViewController: UIViewController {
   }
   
   @IBAction func deleteMeme(sender: AnyObject) {
-    self.deleteMemeWithAnimation()
+    let title = "Delete meme?"
+    let alert = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
+    let yes = UIAlertAction(
+      title: "Delete",
+      style: .Destructive,
+      handler: { _ in
+        self.deleteMemeWithAnimation()
+    })
+    let no = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+    alert.addAction(yes)
+    alert.addAction(no)
+    self.presentViewController(alert, animated: true, completion: nil)
   }
   
   func deleteMemeWithAnimation() {
