@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Meme Editor View Controller-->
@@ -38,15 +39,26 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TOP" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xuD-Nc-aew">
-                                <rect key="frame" x="276" y="73" width="49" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="TOP" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xuD-Nc-aew">
+                                <rect key="frame" x="275" y="73" width="50" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4jj-Ca-Nqx"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="8L7-zs-k6p"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EnR-Rp-K7t"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BOTTOM" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aXt-uW-vh2">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aXt-uW-vh2">
                                 <rect key="frame" x="260" y="481" width="80" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="h1k-XD-M3G"/>
+                                </connections>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-Bb-DZk">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -67,6 +79,7 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="R2f-KW-XAi" firstAttribute="centerX" secondItem="aXt-uW-vh2" secondAttribute="centerX" id="02u-K7-kJ3"/>
                             <constraint firstItem="aXt-uW-vh2" firstAttribute="centerX" secondItem="Ugu-H8-bdP" secondAttribute="centerX" id="6HB-QX-cAP"/>
@@ -129,11 +142,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EgF-2E-u59">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="czq-DS-LEz"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="trash" id="ay0-HU-tYN">
+                                <connections>
+                                    <action selector="deleteMeme:" destination="jLr-xk-k9N" id="cRl-3g-7Ff"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="czq-DS-LEz">
+                                <connections>
+                                    <action selector="actionWithMeme:" destination="jLr-xk-k9N" id="afF-Uu-bbT"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="deleteButton" destination="ay0-HU-tYN" id="Pwd-gJ-npa"/>
                         <outlet property="imageView" destination="TyD-Sg-v1v" id="1TA-iG-cvZ"/>
                     </connections>
                 </viewController>

@@ -34,12 +34,15 @@ class CollectionViewController: UICollectionViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "MemeDetail" {
       let detail = segue.destinationViewController as! MemeViewController
-      let index = self.collectionView!.indexPathForCell(sender as! MemeCollectionCell)!.row
+      let index = self.collectionView!.indexPathForCell(sender as! MemeCollectionCell)!
       
-      guard let image = self.data.getMeme(atIndex: index)?.memedImage else {
+      guard let image = self.data.getMeme(atIndex: index.row)?.memedImage else {
         print("CollectionViewController: Error - could not retrieve image.")
         return
       }
+      
+      detail.delegate = self
+      detail.indexPathToDelete = index
       detail.image = image
     }
   }
@@ -59,5 +62,11 @@ class CollectionViewController: UICollectionViewController {
   
   override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return 1
+  }
+}
+
+extension CollectionViewController: DeleteMemeDelegate {
+  func didDeleteMeme(atIndexPath indexPath: NSIndexPath) {
+    self.data.deleteMeme(atIndex: indexPath.row)
   }
 }

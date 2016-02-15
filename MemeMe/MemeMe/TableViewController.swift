@@ -22,18 +22,14 @@ class TableViewController: UITableViewController {
       let detail = segue.destinationViewController as! MemeViewController
       let cell = sender as! MemeTableCell
       
-      /*
-      guard let index = self.tableView.indexPathForCell(cell)?.row else {
-        print("Error - could not find cell.")
-        return
-      }*/
-      
-      let index = self.tableView.indexPathForCell(cell)!.row
-      guard let image = self.data.getMeme(atIndex: index)?.memedImage else {
+      let index = self.tableView.indexPathForCell(cell)!
+      guard let image = self.data.getMeme(atIndex: index.row)?.memedImage else {
         print("Error - could not retrieve image.")
         return
       }
       
+      detail.delegate = self
+      detail.indexPathToDelete = index
       detail.image = image
     }
   }
@@ -63,5 +59,11 @@ class TableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return 80.0
+  }
+}
+
+extension TableViewController: DeleteMemeDelegate {
+  func didDeleteMeme(atIndexPath indexPath: NSIndexPath) {
+    self.data.deleteMeme(atIndex: indexPath.row)
   }
 }
