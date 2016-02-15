@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Class instead of struct in order to allow persistent storage with NSCoder
 class Meme: NSObject, NSCoding {
   
   var topText: String!
